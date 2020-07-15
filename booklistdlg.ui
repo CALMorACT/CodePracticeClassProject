@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>booklistDlg</class>
+ <widget class="QDialog" name="booklistDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>649</width>
+    <height>444</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QTableView" name="tableView">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>70</y>
+     <width>591</width>
+     <height>311</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="add">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>390</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>新增</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="reviseBtn">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>390</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>修改</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deleteBtn">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>390</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>删除</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="returnBtn">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>390</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>返回</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>591</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,8,2">
+    <item>
+     <widget class="QComboBox" name="cbb_method">
+      <item>
+       <property name="text">
+        <string>请选择查询方式</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>按书名查询</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>按作者查询</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>按编号查询</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="le_cnt"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btn_search">
+      <property name="text">
+       <string>搜索</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
