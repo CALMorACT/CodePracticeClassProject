@@ -68,10 +68,26 @@ void booklistDlg::on_btn_search_clicked()
     this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
 
     this->ui->tableView->setModel(model);
+    try {
+        int index=this->ui->cbb_method->currentIndex();
+        ui->le_cnt->textEdited(m_sLastSearch);
+        QString cnt=this->ui->le_cnt->text();
+        if(index==0)
+        {
+            throw "Please choose your search function";
+        }
+        /*
+         * index:
+         * 1: 按照书名
+         * 2: 按照作者
+         * 3: 按照编号
+        */
+        m_sLastSearch = cnt;
+        doQuery(index,cnt);
+    } catch (const char* err) {
+        QMessageBox::critical(this,"wrong",err,"ok");
+    }
 
-    int index=this->ui->cbb_method->currentIndex();
-    QString cnt=this->ui->le_cnt->text();
-    doQuery(index,cnt);
 }
 void booklistDlg::doQuery(int index,QString cnt){
     int i=0;
@@ -138,11 +154,17 @@ void booklistDlg::on_pushButton_clicked()
 
         this->ui->tableView->setModel(model);
     QFile file("book.txt");
+    if(!file.open(QIODevice::ReadOnly| QIODevice::Text)){
+        QMessageBox::critical(this,"wrong","unable to open file!","ok");//打开失败反馈给用户
+        return;
+    }
     QTextStream in(&file);
+    bok_lines.clear();
     while(!in.atEnd()){
         QString line=in.readLine();
         bok_lines.append(line);
     }
+
     file.close();
     int i=0;
     for(i=0;i<bok_lines.length();i++){

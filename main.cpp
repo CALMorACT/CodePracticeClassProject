@@ -20,7 +20,18 @@
 #include<booklistdlg.h>
 #include<QFile>
 int main(int argc, char *argv[])
-{ QFile file("book.txt");
+{
+    /*
+        两张表：
+            student: name, id, password, bookid1, bookid2, bookid3
+            book: title, bookid, writer, totalnum, num
+            除totalnum和num为int，其余均为varchar
+            如果想做日期，为student增加booktime1 booktime2 booktime3 均为varchar，通过qdate::currentdate()获取日期
+            通过tostring和fromstring转换
+            表book更改成了文件方式
+
+        */
+    QFile file("book.txt");
     if(!file.open(QIODevice::Append| QIODevice::Text)){
         return 0;
     }

@@ -18,6 +18,10 @@ public:
 private slots:
     void on_returnBtn_clicked();
     void refresh();
+    void on_searchBtn_clicked();
+
+    void on_listBtn_clicked();
+
 signals:
     void returnsignal();
 private:

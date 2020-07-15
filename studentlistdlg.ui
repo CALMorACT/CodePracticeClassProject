@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>717</width>
+    <height>481</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,16 +18,16 @@
     <rect>
      <x>50</x>
      <y>10</y>
-     <width>256</width>
-     <height>192</height>
+     <width>611</width>
+     <height>321</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="list1Btn">
+  <widget class="QPushButton" name="listBtn">
    <property name="geometry">
     <rect>
-     <x>22</x>
-     <y>240</y>
+     <x>60</x>
+     <y>430</y>
      <width>101</width>
      <height>28</height>
     </rect>
@@ -36,30 +36,53 @@
     <string>所有学生名单</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="list2Btn">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>240</y>
-     <width>121</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>已借阅学生名单</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="returnBtn">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>240</y>
+     <x>600</x>
+     <y>430</y>
      <width>93</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
     <string>返回</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>360</y>
+     <width>319</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>360</y>
+     <width>45</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>书号：</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="searchBtn">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>360</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>搜索</string>
    </property>
   </widget>
  </widget>

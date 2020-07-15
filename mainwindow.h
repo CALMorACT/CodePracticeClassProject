@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include<QStandardItem>
+#include<QStandardItemModel>
 
 namespace Ui {
 class MainWindow;
@@ -17,14 +19,16 @@ public:
 signals:
     void returnsignal();
     void changepwdsignal();
+    void searchmyborrow();
 private slots:
     void on_returnBtn_clicked();
-
+    void on_searchmyborrowBtn_clicked();
     void on_changepwdBtn_clicked();
     void refresh();
 
 private:
     Ui::MainWindow *ui;
+    QStandardItemModel* model;
 };
 
 #endif // MAINWINDOW_H

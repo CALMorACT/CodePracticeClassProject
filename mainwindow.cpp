@@ -23,8 +23,12 @@ MainWindow::MainWindow(QWidget *parent) :
     {
     close();
     }
-    QSqlQueryModel* model=new QSqlQueryModel;
-    model->setQuery("select title,bookid,writer,num from book");
+    this->model = new QStandardItemModel;
+    this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
+    this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
+    this->model->setHorizontalHeaderItem(2,new QStandardItem("id"));
+    this->model->setHorizontalHeaderItem(3,new QStandardItem("num"));
+    this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
     ui->tableView->setModel(model);
 }
 
@@ -44,6 +48,18 @@ void MainWindow::on_changepwdBtn_clicked()
     this->hide();
     emit changepwdsignal();
 }
+
+void MainWindow::on_searchmyborrowBtn_clicked()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //添加数据库驱动
+    db.setDatabaseName("list.db"); //数据库连接命名
+    if(!db.open()) //打开数据库
+    {
+        close();
+    }
+
+}
+
 void MainWindow::refresh()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //添加数据库驱动

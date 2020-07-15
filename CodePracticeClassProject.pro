@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     registerdlg.cpp \
     changepwddlg.cpp \
     studentlistdlg.cpp \
-    booklistdlg.cpp
+    booklistdlg.cpp \
+    modifybook.cpp
 
 HEADERS  += mainwindow.h \
     delbook.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     registerdlg.h \
     changepwddlg.h \
     studentlistdlg.h \
-    booklistdlg.h
+    booklistdlg.h \
+    modifybook.h
 
 FORMS    += mainwindow.ui \
     delbook.ui \
@@ -42,4 +44,5 @@ FORMS    += mainwindow.ui \
     registerdlg.ui \
     changepwddlg.ui \
     studentlistdlg.ui \
-    booklistdlg.ui
+    booklistdlg.ui \
+    modifybook.ui

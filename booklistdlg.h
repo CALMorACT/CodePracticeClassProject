@@ -52,6 +52,7 @@ private:
     QList<QString> bok_lines;
     QStandardItemModel *model;
     delBook b;
+    QString m_sLastSearch;
 };
 
 #endif // BOOKLISTDLG_H
