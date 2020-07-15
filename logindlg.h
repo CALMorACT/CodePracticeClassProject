@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-15 16:32:17
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\logindlg.h
+ */ 
 #ifndef LOGINDLG_H
 #define LOGINDLG_H
 
@@ -14,7 +22,7 @@ class loginDlg : public QDialog
 public:
     explicit loginDlg(QWidget *parent = 0);
     ~loginDlg();
-    static QString userid;//全局变量，登录者id
+    static QString userid;//鍏ㄥ眬鍙橀噺锛岀櫥褰曡�卛d
 private slots:
     void on_exitBtn_clicked();
     void on_loginBtn_clicked();

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-15 16:20:05
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\changepwddlg.cpp
+ */ 
 #include "changepwddlg.h"
 #include "ui_changepwddlg.h"
 #include <QtGui>
@@ -18,7 +26,7 @@ changepwdDlg::~changepwdDlg()
 {
     delete ui;
 }
-//·µ»Ø
+//è¿”å›
 void changepwdDlg::on_returnBtn_clicked()
 {
     ui->newpwdlineEdit->clear();
@@ -32,28 +40,28 @@ void changepwdDlg::on_returnBtn_clicked()
     }
 }
 
-//¸ü¸ÄÃÜÂë
+//æ›´æ”¹å¯†ç 
 void changepwdDlg::on_changepwdBtn_clicked()
 {
-    //¼ì²éÁ½´ÎÊäÈëµÄÃÜÂëÊÇ·ñÎª¿Õ
+    //æ£€æŸ¥ä¸¤æ¬¡è¾“å…¥çš„å¯†ç æ˜¯å¦ä¸ºç©º
     if(ui->newpwdlineEdit->text()==""||ui->newpwdlineEdit_2->text()==""){
         QMessageBox::warning(this,"Warning","Password one or password two is empty!",QMessageBox::Yes);
     }
     else{
-        //¼ì²éÁ½´ÎÊäÈëµÄÃÜÂëÊÇ·ñÒ»ÖÂ
+        //æ£€æŸ¥ä¸¤æ¬¡è¾“å…¥çš„å¯†ç æ˜¯å¦ä¸€è‡´
         if(ui->newpwdlineEdit->text()==ui->newpwdlineEdit_2->text()){
-            QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-            db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû¡£
-            if(!db.open()) //´ò¿ªÊı¾İ¿â
+            QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+            db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½åã€‚
+            if(!db.open()) //æ‰“å¼€æ•°æ®åº“
             {
                 close();
             }
             else{
-                QSqlQuery query(db); //ÒÔÏÂÖ´ĞĞÏà¹Ø QSL Óï¾ä
+                QSqlQuery query(db); //ä»¥ä¸‹æ‰§è¡Œç›¸å…³ QSL è¯­å¥
                 QString id , newpwd;
                 id=loginDlg::userid;
                 newpwd=ui->newpwdlineEdit->text();
-                QString updatesql=QString("update student set password = '%1' where id = '%2'").arg(newpwd).arg(id);//ËÑË÷µÇÂ¼ÕßĞÅÏ¢²¢¸ü¸ÄÃÜÂëÏî
+                QString updatesql=QString("update student set password = '%1' where id = '%2'").arg(newpwd).arg(id);//æœç´¢ç™»å½•è€…ä¿¡æ¯å¹¶æ›´æ”¹å¯†ç é¡¹
                 bool a=query.exec(updatesql);
                 if(a){
                     QMessageBox::information(this,"Change password successfully!","Change password successfully!!!",QMessageBox::Yes);

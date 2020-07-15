@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-15 16:19:49
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\booklistdlg.h
+ */ 
 #ifndef BOOKLISTDLG_H
 #define BOOKLISTDLG_H
 
@@ -23,9 +31,9 @@ public:
 
 private slots:
     void on_returnBtn_clicked();
-    void display(int row,QStringList subs);//ÔÚÄ£ĞÍÖĞÊä³öµÄº¯Êı
+    void display(int row,QStringList subs);//åœ¨æ¨¡å‹ä¸­è¾“å‡ºçš„å‡½æ•°
     void on_add_clicked();
-    int readFromFile();//¶ÁÈëÊı¾İ´æÈëÈİÆ÷µÄº¯Êı
+    int readFromFile();//è¯»å…¥æ•°æ®å­˜å…¥å®¹å™¨çš„å‡½æ•°
     void doQuery(int index,QString cnt);
     void on_btn_search_clicked();
     int cmp(QString str1,QString str2);

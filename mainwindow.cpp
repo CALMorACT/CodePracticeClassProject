@@ -11,9 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->bookidEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½å
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
     close();
     }
@@ -41,9 +41,9 @@ void MainWindow::on_changepwdBtn_clicked()
 void MainWindow::refresh()
 {
     ui->bookidEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½å
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
     close();
     }
@@ -57,16 +57,16 @@ void MainWindow::on_borrowBtn_clicked()
     bookid=ui->bookidEdit->text();
     studentid=loginDlg::userid;
 
-    //QStringÀàĞÍ±äÁ¿bookid¼´ÎªÑ§ÉúÏë½èµÄÊéµÄid£¬²éÑ¯bookÎÄ¼şÄÚÊÇ·ñÓĞÊéºÅµÈÓÚ±äÁ¿bookidµÄÊé£¬²¢ÇÒ¹İÄÚÊÇ·ñ»¹ÓĞ¿â´æ£¬Èç¹ûÃ»ÓĞÔò·Ö±ğ·¢³ö²»Í¬µÄ¾¯¸æ£¬Èç¹ûÓĞ¾Í½«
-    //¿â´æÁ¿¼õÒ»
+    //QStringç±»å‹å˜é‡bookidå³ä¸ºå­¦ç”Ÿæƒ³å€Ÿçš„ä¹¦çš„idï¼ŒæŸ¥è¯¢bookæ–‡ä»¶å†…æ˜¯å¦æœ‰ä¹¦å·ç­‰äºå˜é‡bookidçš„ä¹¦ï¼Œå¹¶ä¸”é¦†å†…æ˜¯å¦è¿˜æœ‰åº“å­˜ï¼Œå¦‚æœæ²¡æœ‰åˆ™åˆ†åˆ«å‘å‡ºä¸åŒçš„è­¦å‘Šï¼Œå¦‚æœæœ‰å°±å°†
+    //åº“å­˜é‡å‡ä¸€
 
 
 
 
-    //Èç¹ûÊäÈëµÄbookid´æÔÚ²¢ÇÒ¹İÄÚÓĞ´ËÊéÔòÖ´ĞĞÒÔÏÂ´úÂë
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû¡£
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    //å¦‚æœè¾“å…¥çš„bookidå­˜åœ¨å¹¶ä¸”é¦†å†…æœ‰æ­¤ä¹¦åˆ™æ‰§è¡Œä»¥ä¸‹ä»£ç 
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½åã€‚
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
         close();
     }
@@ -125,9 +125,9 @@ void MainWindow::on_borrowBtn_clicked()
 
 void MainWindow::on_remandBtn_clicked()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû¡£
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½åã€‚
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
         close();
     }
@@ -187,8 +187,8 @@ void MainWindow::on_remandBtn_clicked()
             }
         }
         if(a){
-            //½«¸ÃÊéµÄ¿â´æÁ¿¼ÓÒ»,¸ÃÊéÊéºÅ±äÁ¿Îªbookid£¬±äÁ¿ÀàĞÍÎªQString
-            a=1;//Õ¼Î»£¬¿ÉÉ¾
+            //å°†è¯¥ä¹¦çš„åº“å­˜é‡åŠ ä¸€,è¯¥ä¹¦ä¹¦å·å˜é‡ä¸ºbookidï¼Œå˜é‡ç±»å‹ä¸ºQString
+            a=1;//å ä½ï¼Œå¯åˆ 
 
 
 
@@ -203,9 +203,9 @@ void MainWindow::on_remandBtn_clicked()
 
 void MainWindow::on_mybookBtn_clicked()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû¡£
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½åã€‚
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
         close();
     }
@@ -231,9 +231,9 @@ void MainWindow::on_mybookBtn_clicked()
 void MainWindow::on_allbookBtn_clicked()
 {
     ui->bookidEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½å
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
     close();
     }

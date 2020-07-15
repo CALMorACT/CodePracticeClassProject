@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-15 16:33:27
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\newbook.h
+ */ 
 #ifndef NEWBOOK_H
 #define NEWBOOK_H
 
@@ -16,7 +24,7 @@ public:
     explicit newBook(QWidget *parent = nullptr);
     ~newBook();
     void writeToFile(QString cnt);
-    void clearUserFace();//»∑»œ∫Û«Â∆¡
+    void clearUserFace();//Á°ÆËÆ§ÂêéÊ∏ÖÂ±è
 
 private slots:
     void on_ok_bu_clicked();

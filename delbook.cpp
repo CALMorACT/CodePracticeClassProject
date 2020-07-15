@@ -11,7 +11,7 @@ delBook::delBook(QWidget *parent) :
 {
     ui->setupUi(this);
     if(readdata()==-1){
-        QMessageBox::critical(this,"wrong","unable to open file","ok");//´ò¿ªÎÄ¼şÊ§°Ü£¬·´À¡¸øÓÃ»§
+        QMessageBox::critical(this,"wrong","unable to open file","ok");//æ‰“å¼€æ–‡ä»¶å¤±è´¥ï¼Œåé¦ˆç»™ç”¨æˆ·
         this->close();
     }
 }
@@ -24,7 +24,7 @@ delBook::~delBook()
 int delBook::readdata(){
     QFile file("book.txt");
     if(!file.open(QIODevice::ReadOnly| QIODevice::Text)){
-        return -1;//´ò¿ªÊ§°Ü·µ»Ø-1
+        return -1;//æ‰“å¼€å¤±è´¥è¿”å›-1
     }
     QTextStream in(&file);
     while(!in.atEnd()){
@@ -40,32 +40,32 @@ int delBook::readdata(){
 }
 
 void delBook::Deleteoneline(int nNum, QString &strall){
-    int nLine=0;//´æ·ÅÎÄ¼şÖĞÊı¾İµÄĞĞÊı
+    int nLine=0;//å­˜æ”¾æ–‡ä»¶ä¸­æ•°æ®çš„è¡Œæ•°
     int Index=0;
-    //Ëã³öĞĞÊınLine
+    //ç®—å‡ºè¡Œæ•°nLine
     while(Index!=-1){
         Index=strall.indexOf('\n',Index+1);
         nLine++;
     }
-    //É¾³ıµÄÊÇµÚ0ĞĞÄÚÈİ
+    //åˆ é™¤çš„æ˜¯ç¬¬0è¡Œå†…å®¹
     if(nNum==0){
-        int nIndex=strall.indexOf('\n');//¼ÆËã³öµÚÒ»¸ö»»ĞĞ·ûµÄÎ»ÖÃ
-        strall.remove(0,nIndex+1);//É¾³ı´ÓµÚ0¸ö×Ö·ûµ½µÚÒ»¸ö»»ĞĞ·ûµÄÄÚÈİ
+        int nIndex=strall.indexOf('\n');//è®¡ç®—å‡ºç¬¬ä¸€ä¸ªæ¢è¡Œç¬¦çš„ä½ç½®
+        strall.remove(0,nIndex+1);//åˆ é™¤ä»ç¬¬0ä¸ªå­—ç¬¦åˆ°ç¬¬ä¸€ä¸ªæ¢è¡Œç¬¦çš„å†…å®¹
     }
     else{
         int ntemp=nNum;
         int nIndex=0,nIndex2=0;
         while(ntemp--){
-            nIndex=strall.indexOf('\n',nIndex+1);//ÕâÀï»á¸üĞÂnIndex
-            if(nIndex!=-1){//ËµÃ÷ÊÇÓĞĞ§µÄ
+            nIndex=strall.indexOf('\n',nIndex+1);//è¿™é‡Œä¼šæ›´æ–°nIndex
+            if(nIndex!=-1){//è¯´æ˜æ˜¯æœ‰æ•ˆçš„
                 nIndex2=strall.indexOf('\n',nIndex+1);
             }
-        }//¼ÆËã³öÒªÉ¾³ıĞĞµÄ×Ö·ûÆğÊ¼Î»ÖÃºÍÖÕÖ¹Î»ÖÃ
-        //É¾³ıµÄ²»ÊÇ×îºóÒ»ĞĞ
+        }//è®¡ç®—å‡ºè¦åˆ é™¤è¡Œçš„å­—ç¬¦èµ·å§‹ä½ç½®å’Œç»ˆæ­¢ä½ç½®
+        //åˆ é™¤çš„ä¸æ˜¯æœ€åä¸€è¡Œ
         if(nNum<nLine-1){
             strall.remove(nIndex+1,nIndex2-nIndex);
         }
-        //É¾³ıµÄÊÇ×îºóÒ»ĞĞ
+        //åˆ é™¤çš„æ˜¯æœ€åä¸€è¡Œ
         else if(nNum==nLine-1){
             int len =strall.length();
             strall.remove(nIndex,len-nIndex);
@@ -77,7 +77,7 @@ void delBook::deleteOnelineInFile(int nNUmLine){
     QFile readfile("book.txt");
     if(readfile.open(QIODevice::ReadOnly)){
         QTextStream stream(&readfile);
-        strall=stream.readAll();//½«ÎÄ¼şÄÚÈİÈ«²¿·ÅÈëstrallÖĞ
+        strall=stream.readAll();//å°†æ–‡ä»¶å†…å®¹å…¨éƒ¨æ”¾å…¥strallä¸­
     }
     readfile.close();
     deleter(strall);
@@ -107,10 +107,10 @@ void delBook::on_ok_but_clicked()
     int i=0;
     int temp=0;
     for(i=0;i<del_lines.length();i++){
-        QString line=del_lines.at(i);//´ÓÈİÆ÷ÖĞµÃµ½Ã¿Ò»ĞĞµÄÊı¾İ
+        QString line=del_lines.at(i);//ä»å®¹å™¨ä¸­å¾—åˆ°æ¯ä¸€è¡Œçš„æ•°æ®
         line=line.trimmed();
-        QStringList subs=line.split(" ");//½«¸÷¸öÊı¾İ·ÖÀë
-        if(id==subs.at(2)&&name==subs.at(0)&&writer==subs.at(1)){//±È½ÏÎÄ¼şÖĞµÄ±àºÅºÍÓÃ»§ËùÊäÈëµÄ±àºÅ£¬Èç¹ûÏàµÈÔò½øĞĞÉ¾³ı²Ù×÷
+        QStringList subs=line.split(" ");//å°†å„ä¸ªæ•°æ®åˆ†ç¦»
+        if(id==subs.at(2)&&name==subs.at(0)&&writer==subs.at(1)){//æ¯”è¾ƒæ–‡ä»¶ä¸­çš„ç¼–å·å’Œç”¨æˆ·æ‰€è¾“å…¥çš„ç¼–å·ï¼Œå¦‚æœç›¸ç­‰åˆ™è¿›è¡Œåˆ é™¤æ“ä½œ
                 deleteOnelineInFile(i);
                 temp=1;
                 QMessageBox::question(this,"congratulation","operation was successful","ok");
@@ -123,9 +123,9 @@ void delBook::on_ok_but_clicked()
     }
 }
 void delBook::deleter(QString &strall){
-    int nLine=0;//´æ·ÅÎÄ¼şÖĞÊı¾İµÄĞĞÊı
+    int nLine=0;//å­˜æ”¾æ–‡ä»¶ä¸­æ•°æ®çš„è¡Œæ•°
     int Index=0;
-    //Ëã³öĞĞÊınLine
+    //ç®—å‡ºè¡Œæ•°nLine
     while(Index!=-1){
         Index=strall.indexOf('\r',Index+1);
         nLine++;

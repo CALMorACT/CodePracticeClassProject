@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-15 16:32:07
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\logindlg.cpp
+ */ 
 #include "logindlg.h"
 #include "ui_logindlg.h"
 #include <QtGui>
@@ -17,16 +25,16 @@ loginDlg::~loginDlg()
 {
     delete ui;
 }
-//µÇÂ¼
+//ç™»å½•
 void loginDlg::on_loginBtn_clicked(){
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-    db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊý¾Ý¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿žæŽ¥å‘½å
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
     close();
     }
-    //¼ìË÷Ñ§ÉúÃûµ¥£¬²éÕÒÑ§ºÅ¼°ÃÜÂë¶ÔÓ¦µÄÏî
-    QSqlQuery query(db); //ÒÔÏÂÖ´ÐÐÏà¹Ø QSL Óï¾ä
+    //æ£€ç´¢å­¦ç”Ÿåå•ï¼ŒæŸ¥æ‰¾å­¦å·åŠå¯†ç å¯¹åº”çš„é¡¹
+    QSqlQuery query(db); //ä»¥ä¸‹æ‰§è¡Œç›¸å…³ QSL è¯­å¥
     query.exec("select name,id,password from student where id >= '0'");
     int a=0;
     while(query.next()){
@@ -38,26 +46,26 @@ void loginDlg::on_loginBtn_clicked(){
             ui->pwdLineEdit->clear();
             a=1;
             this->hide();
-            //Èç¹ûÊÇ¹ÜÀíÕßµÇÂ¼£¬ÔòÌø×ªµ½¹ÜÀíÕß½çÃæ
+            //å¦‚æžœæ˜¯ç®¡ç†è€…ç™»å½•ï¼Œåˆ™è·³è½¬åˆ°ç®¡ç†è€…ç•Œé¢
             if(userid=="manager"){
                 emit managerlogin();
             }
-            //Èç¹û²»ÊÇ¹ÜÀíÕßµÇÂ¼£¬ÔòÌø×ªµ½Í¶Æ±½çÃæ
+            //å¦‚æžœä¸æ˜¯ç®¡ç†è€…ç™»å½•ï¼Œåˆ™è·³è½¬åˆ°æŠ•ç¥¨ç•Œé¢
             else{
                 emit login();
             }
         }
     }
-    //Èç¹ûÔÚÑ§ÉúÃûµ¥ÖÐÎ´ÕÒµ½Æ¥ÅäµÄÏî¾Í·¢³ö¾¯¸æ
+    //å¦‚æžœåœ¨å­¦ç”Ÿåå•ä¸­æœªæ‰¾åˆ°åŒ¹é…çš„é¡¹å°±å‘å‡ºè­¦å‘Š
     if(a==0){
         QMessageBox::warning(this,"Warning","User name or password  error!",QMessageBox::Yes);
     }
 }
-//ÍË³ö
+//é€€å‡º
 void loginDlg::on_exitBtn_clicked(){
     close();
 }
-//×¢²á
+//æ³¨å†Œ
 void loginDlg::on_registerBtn_clicked()
 {
     ui->usrLineEdit->clear();

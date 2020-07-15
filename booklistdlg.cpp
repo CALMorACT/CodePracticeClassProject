@@ -18,7 +18,7 @@ booklistDlg::booklistDlg(QWidget *parent) :
        this->close();
    }
    this->model=new QStandardItemModel;
-   //ÉèÖÃ±íÍ·
+   //è®¾ç½®è¡¨å¤´
    this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
    this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
    this->model->setHorizontalHeaderItem(2,new QStandardItem("id"));
@@ -47,7 +47,7 @@ void booklistDlg::on_add_clicked()
 int booklistDlg::readFromFile(){
     QFile file("book.txt");
     if(!file.open(QIODevice::ReadOnly| QIODevice::Text)){
-        return -1;//´ò¿ªÊ§°Ü·µ»Ø-1
+        return -1;//æ‰“å¼€å¤±è´¥è¿”å›ž-1
     }
     QTextStream in(&file);
     while(!in.atEnd()){
@@ -81,9 +81,9 @@ void booklistDlg::doQuery(int index,QString cnt){
     int i=0;
     int row=0;
     for(i=0;i<bok_lines.length();i++){
-        QString line=bok_lines.at(i);//´ÓÈÝÆ÷ÖÐµÃµ½Ã¿Ò»ÐÐµÄÊý¾Ý
+        QString line=bok_lines.at(i);//ä»Žå®¹å™¨ä¸­å¾—åˆ°æ¯ä¸€è¡Œçš„æ•°æ®
         line=line.trimmed();
-        QStringList subs=line.split(" ");//½«¸÷¸öÊý¾Ý·ÖÀë
+        QStringList subs=line.split(" ");//å°†å„ä¸ªæ•°æ®åˆ†ç¦»
         switch (index){
         case 1:
             if(cmp(subs.at(0),cnt)){
@@ -102,12 +102,12 @@ void booklistDlg::doQuery(int index,QString cnt){
 
                 display(row++,subs);
             }
-            break;//°´ÊéµÄ±àºÅ
+            break;//æŒ‰ä¹¦çš„ç¼–å·
 
         }
     }
 }
-void booklistDlg::display(int row,QStringList subs){//´«ÈëÐÐºÍÊéµÄÐÅÏ¢
+void booklistDlg::display(int row,QStringList subs){//ä¼ å…¥è¡Œå’Œä¹¦çš„ä¿¡æ¯
     int i=0;
     for(i=0;i<subs.length();i++){
         this->model->setItem(row,i,new QStandardItem(subs.at(i)));

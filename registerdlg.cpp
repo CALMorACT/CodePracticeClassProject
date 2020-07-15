@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-15 16:33:38
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\registerdlg.cpp
+ */ 
 #include "registerdlg.h"
 #include "ui_registerdlg.h"
 #include <QMessageBox>
@@ -15,24 +23,24 @@ registerDlg::~registerDlg()
 {
     delete ui;
 }
-//È·ÈÏ×¢²á
+//ç¡®è®¤æ³¨å†Œ
 void registerDlg::on_registerBtn_clicked()
 {
-    //¼ì²é×¢²áÐÅÏ¢ÊÇ·ñÓÐÎ´ÌîÏî
+    //æ£€æŸ¥æ³¨å†Œä¿¡æ¯æ˜¯å¦æœ‰æœªå¡«é¡¹
     if(ui->nameEdit->text()==""||ui->registerid->text()==""||ui->registerpwd->text()==""||ui->registerpwd2->text()==""){
         QMessageBox::warning(this,"Warning","Name,id , password one or password two is empty!",QMessageBox::Yes);
     }
     else{
-        //¼ì²éÁ½´ÎÃÜÂëÊÇ·ñÒ»ÖÂ
+        //æ£€æŸ¥ä¸¤æ¬¡å¯†ç æ˜¯å¦ä¸€è‡´
         if(ui->registerpwd->text()==ui->registerpwd2->text()){
-            QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-            db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû£¬¡°Ñ§ÉúÃûµ¥¡±
-            if(!db.open()) //´ò¿ªÊý¾Ý¿â
+            QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+            db.setDatabaseName("list.db"); //æ•°æ®åº“è¿žæŽ¥å‘½åï¼Œâ€œå­¦ç”Ÿåå•â€
+            if(!db.open()) //æ‰“å¼€æ•°æ®åº“
             {
             close();
             }
-            //¼ì²éÊÇ·ñÖØ¸´×¢²á
-            QSqlQuery query(db); //ÒÔÏÂÖ´ÐÐÏà¹Ø QSL Óï¾ä
+            //æ£€æŸ¥æ˜¯å¦é‡å¤æ³¨å†Œ
+            QSqlQuery query(db); //ä»¥ä¸‹æ‰§è¡Œç›¸å…³ QSL è¯­å¥
             query.exec("select name,id,password from student where id >= '0'");
             int a=0;
             while(query.next()){
@@ -76,7 +84,7 @@ void registerDlg::on_registerBtn_clicked()
         }
     }
 }
-//·µ»Ø
+//è¿”å›ž
 void registerDlg::on_returnBtn_clicked()
 {
     ui->nameEdit->clear();

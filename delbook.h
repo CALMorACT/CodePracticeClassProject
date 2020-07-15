@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-15 16:21:22
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\delbook.h
+ */ 
 #ifndef DELBOOK_H
 #define DELBOOK_H
 
@@ -14,8 +22,8 @@ class delBook : public QDialog
 public:
     explicit delBook(QWidget *parent = nullptr);
     ~delBook();
-    int readdata();//»ñÈ¡ÎÄ¼şÊı¾İµÄº¯Êı
-    void Deleteoneline(int nNum,QString &strall);//É¾³ıÄ³Ò»ĞĞµÄº¯Êı£¬nNum´ú±íÄ³Ò»ĞĞ£¨´ÓµÚ0ĞĞ¿ªÊ¼¼ÆÊı£©£¬strallÊÇÎÄ¼şÀïËùÓĞµÄÄÚÈİ
+    int readdata();//è·å–æ–‡ä»¶æ•°æ®çš„å‡½æ•°
+    void Deleteoneline(int nNum,QString &strall);//åˆ é™¤æŸä¸€è¡Œçš„å‡½æ•°ï¼ŒnNumä»£è¡¨æŸä¸€è¡Œï¼ˆä»ç¬¬0è¡Œå¼€å§‹è®¡æ•°ï¼‰ï¼Œstrallæ˜¯æ–‡ä»¶é‡Œæ‰€æœ‰çš„å†…å®¹
     void deleteOnelineInFile(int nNUmLine);
     void deleter(QString &strall);
     void clearFace();
@@ -28,7 +36,7 @@ private slots:
 
 private:
     Ui::delBook *ui;
-    QList<QString> del_lines;//´æ·ÅÎÄ¼şÊı¾İµÄÈİÆ÷
+    QList<QString> del_lines;//å­˜æ”¾æ–‡ä»¶æ•°æ®çš„å®¹å™¨
 
 };
 

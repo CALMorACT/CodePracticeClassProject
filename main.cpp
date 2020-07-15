@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-15 16:32:26
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\main.cpp
+ */ 
 #include "mainwindow.h"
 #include <QApplication>
 #include<logindlg.h>
@@ -12,13 +20,13 @@
 #include<booklistdlg.h>
 int main(int argc, char *argv[])
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½å
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
     return 0;
     }
-    QSqlQuery query(db); //ÒÔÏÂÖ´ĞĞÏà¹Ø QSL Óï¾ä
+    QSqlQuery query(db); //ä»¥ä¸‹æ‰§è¡Œç›¸å…³ QSL è¯­å¥
     query.exec("create table student(name varchar,id varchar primary key,password varchar,bookid1 varchar,bookid2 varchar,bookid3 vachar)");
     query.exec("insert into student values('manager','manager','123456','-1','-1','-1')");
     QApplication a(argc, argv);

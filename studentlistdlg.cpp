@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-15 16:33:59
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\studentlistdlg.cpp
+ */ 
 #include "studentlistdlg.h"
 #include "ui_studentlistdlg.h"
 #include <QApplication>
@@ -11,9 +19,9 @@ studentlistDlg::studentlistDlg(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½å
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
     close();
     }
@@ -36,13 +44,13 @@ void studentlistDlg::on_returnBtn_clicked()
     this->hide();
     emit returnsignal();
 }
-//Ë¢ĞÂÏÔÊ¾
+//åˆ·æ–°æ˜¾ç¤º
 void studentlistDlg::refresh()
 {
     ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½å
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
     close();
     }
@@ -59,9 +67,9 @@ void studentlistDlg::on_searchBtn_clicked()
 {
     QString bookid;
     bookid=ui->lineEdit->text();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½å
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
     close();
     }
@@ -77,9 +85,9 @@ void studentlistDlg::on_searchBtn_clicked()
 void studentlistDlg::on_listBtn_clicked()
 {
     ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊı¾İ¿âÇı¶¯
-    db.setDatabaseName("list.db"); //Êı¾İ¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊı¾İ¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //æ·»åŠ æ•°æ®åº“é©±åŠ¨
+    db.setDatabaseName("list.db"); //æ•°æ®åº“è¿æ¥å‘½å
+    if(!db.open()) //æ‰“å¼€æ•°æ®åº“
     {
     close();
     }
