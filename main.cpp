@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-07-15 16:08:20
- * @LastEditTime: 2020-07-15 16:32:26
+ * @LastEditTime: 2020-07-15 16:52:50
  * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \CodePracticeClassProject\main.cpp
@@ -18,8 +18,13 @@
 #include<changepwddlg.h>
 #include<studentlistdlg.h>
 #include<booklistdlg.h>
+#include<QFile>
 int main(int argc, char *argv[])
-{
+{ QFile file("book.txt");
+    if(!file.open(QIODevice::Append| QIODevice::Text)){
+        return 0;
+    }
+    file.close();
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //添加数据库驱动
     db.setDatabaseName("list.db"); //数据库连接命名
     if(!db.open()) //打开数据库
@@ -28,7 +33,9 @@ int main(int argc, char *argv[])
     }
     QSqlQuery query(db); //以下执行相关 QSL 语句
     query.exec("create table student(name varchar,id varchar primary key,password varchar,bookid1 varchar,bookid2 varchar,bookid3 vachar)");
-    query.exec("insert into student values('manager','manager','123456','-1','-1','-1')");
+    query.exec("insert into student values('manager','manager','123456','0','0','0')");
+    //向表中插入 1 条记录,管理者
+    query.exec("create table book(title varchar,bookid varchar primary key,writer varchar,totalnum int,num int)");
     QApplication a(argc, argv);
     MainWindow w;
     loginDlg l;

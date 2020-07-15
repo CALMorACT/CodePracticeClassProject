@@ -55,10 +55,6 @@ int booklistDlg::readFromFile(){
         bok_lines.append(line);
     }
     file.close();
-    int i=0;
-    for(i=0;i<bok_lines.length();i++){
-
-    }
     return 0;
 }
 
@@ -129,4 +125,39 @@ int booklistDlg::cmp(QString str1,QString str2){
 void booklistDlg::on_deleteBtn_clicked()
 {
     b.show();
+}
+
+void booklistDlg::on_pushButton_clicked()
+{
+    this->model->clear();
+        this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
+        this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
+        this->model->setHorizontalHeaderItem(2,new QStandardItem("id"));
+        this->model->setHorizontalHeaderItem(3,new QStandardItem("num"));
+        this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
+
+        this->ui->tableView->setModel(model);
+    QFile file("book.txt");
+    QTextStream in(&file);
+    while(!in.atEnd()){
+        QString line=in.readLine();
+        bok_lines.append(line);
+    }
+    file.close();
+    int i=0;
+    for(i=0;i<bok_lines.length();i++){
+        QString line=bok_lines.at(i);//从容器中得到每一行的数据
+        line=line.trimmed();
+        QStringList subs=line.split(" ");
+        int j=0;
+        for(j=0;j<subs.length();j++){
+            this->model->setItem(i,j,new QStandardItem(subs.at(j)));
+        }
+    }
+
+}
+
+void booklistDlg::on_reviseBtn_clicked()
+{
+
 }

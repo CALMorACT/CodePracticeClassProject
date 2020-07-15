@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-07-15 16:08:20
- * @LastEditTime: 2020-07-15 16:33:59
+ * @LastEditTime: 2020-07-15 16:53:26
  * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \CodePracticeClassProject\studentlistdlg.cpp
@@ -18,20 +18,15 @@ studentlistDlg::studentlistDlg(QWidget *parent) :
     ui(new Ui::studentlistDlg)
 {
     ui->setupUi(this);
-    ui->lineEdit->clear();
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //添加数据库驱动
     db.setDatabaseName("list.db"); //数据库连接命名
     if(!db.open()) //打开数据库
     {
     close();
     }
-    QSqlTableModel* model=new QSqlTableModel;
-    model->setTable("student");
-    model->setFilter(QObject::tr("bookid1 >= 0 and bookid2 >= 0 and bookid3 >= 0 "));
-    model->select();
-    model->removeColumn(2);
+    QSqlQueryModel* model=new QSqlQueryModel;
+    model->setQuery("select name,id,bookid1,bookid2,bookid3 from student where id>0");
     ui->tableView->setModel(model);
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 studentlistDlg::~studentlistDlg()
@@ -47,56 +42,13 @@ void studentlistDlg::on_returnBtn_clicked()
 //刷新显示
 void studentlistDlg::refresh()
 {
-    ui->lineEdit->clear();
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //添加数据库驱动
     db.setDatabaseName("list.db"); //数据库连接命名
     if(!db.open()) //打开数据库
     {
     close();
     }
-    QSqlTableModel* model=new QSqlTableModel;
-    model->setTable("student");
-    model->setFilter(QObject::tr("bookid1 >= 0 and bookid2 >= 0 and bookid3 >= 0 "));
-    model->select();
-    model->removeColumn(2);
+    QSqlQueryModel* model=new QSqlQueryModel;
+    model->setQuery("select name,id,bookid1,bookid2,bookid3 from student where id>0");
     ui->tableView->setModel(model);
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
-
-void studentlistDlg::on_searchBtn_clicked()
-{
-    QString bookid;
-    bookid=ui->lineEdit->text();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //添加数据库驱动
-    db.setDatabaseName("list.db"); //数据库连接命名
-    if(!db.open()) //打开数据库
-    {
-    close();
-    }
-    QSqlTableModel* model=new QSqlTableModel;
-    model->setTable("student");
-    model->setFilter(QObject::tr("bookid1 = '%1' or bookid2 = '%2' or bookid3 = '%3'").arg(bookid).arg(bookid).arg(bookid));
-    model->select();
-    model->removeColumn(2);
-    ui->tableView->setModel(model);
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-}
-
-void studentlistDlg::on_listBtn_clicked()
-{
-    ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //添加数据库驱动
-    db.setDatabaseName("list.db"); //数据库连接命名
-    if(!db.open()) //打开数据库
-    {
-    close();
-    }
-    QSqlTableModel* model=new QSqlTableModel;
-    model->setTable("student");
-    model->setFilter(QObject::tr("bookid1 >= 0 and bookid2 >= 0 and bookid3 >= 0 "));
-    model->select();
-    model->removeColumn(2);
-    ui->tableView->setModel(model);
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-}
-

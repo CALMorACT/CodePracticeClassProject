@@ -23,15 +23,6 @@ private slots:
     void on_changepwdBtn_clicked();
     void refresh();
 
-    void on_borrowBtn_clicked();
-
-
-    void on_remandBtn_clicked();
-
-    void on_mybookBtn_clicked();
-
-    void on_allbookBtn_clicked();
-
 private:
     Ui::MainWindow *ui;
 };

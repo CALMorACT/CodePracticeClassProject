@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-07-15 16:08:20
- * @LastEditTime: 2020-07-15 16:19:49
+ * @LastEditTime: 2020-07-15 16:52:32
  * @LastEditors: your name
  * @Description: In User Settings Edit
  * @FilePath: \CodePracticeClassProject\booklistdlg.h
@@ -39,6 +39,10 @@ private slots:
     int cmp(QString str1,QString str2);
 
     void on_deleteBtn_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_reviseBtn_clicked();
 
 signals:
     void returnsignal();

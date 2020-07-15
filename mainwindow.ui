@@ -89,7 +89,7 @@
      <string>归还</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="bookidEdit">
+   <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -172,32 +172,6 @@
     </property>
     <property name="text">
      <string>书号搜索</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="mybookBtn">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>95</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>已借阅书籍</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="allbookBtn">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>60</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>所有书籍</string>
     </property>
    </widget>
   </widget>
