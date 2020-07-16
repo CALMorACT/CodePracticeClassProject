@@ -50,7 +50,7 @@ private slots:
     void on_remandBtn_clicked();
 
     void on_borrowed_clicked();
-    int borrowBook(QString id);/****************ÐÂÔö***************/
+    int borrowBook(QString id);
     int returnBook(QString id);
     int Change(int nNum,QString &strall,QString cnt);
     void ChangeInFile(int nNUmLine,QString cnt);
