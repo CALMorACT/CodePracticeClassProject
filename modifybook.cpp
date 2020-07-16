@@ -42,11 +42,12 @@ void modifyBook::on_ok_but_clicked()
 
      this->ui->tableView->setModel(model);
      this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    QString id=this->ui->le_id->text();
+    QString id=this->ui->le_id->text().trimmed();
      bok_lines.clear();
       readFile();
-     doQuery(id);
-
+      if(id!=""){
+          doQuery(id);
+      }
 }
 void modifyBook::doQuery(QString id){
     int i=0;
@@ -82,14 +83,6 @@ void modifyBook::display(int row, QStringList subs){
         this->model->setItem(row,i,new QStandardItem(subs.at(i)));
 }
 }
-/*
- *
- *
- *
- *
- *
- *
-*/
 
 void modifyBook::deleter(QString &strall){
     int nLine=0;//存放文件中数据的行数
@@ -132,16 +125,16 @@ int modifyBook::MOdify(int nNum, QString &strall, QString cnt){
             }
         }
         //替换的不是最后一行
-        if(nNum<nLine-1&&nLine>1){
+        if(nNum<nLine-1){
             strall.replace(nIndex+1,nIndex2-nIndex,cnt);
         }
         //删除的是最后一行
         if(nNum==nLine-1&&nLine==1){
-            int len =strall.length();
+            int len = strall.length();
             strall.replace(nIndex,len-nIndex,cnt);
             lastline=1;
         }
-        else if(nNum==nLine-1&&nLine!=1){
+        else if(nNum==nLine-1){
             int len =strall.length();
             strall.replace(nIndex+1,len-nIndex,cnt);
             lastline=1;
