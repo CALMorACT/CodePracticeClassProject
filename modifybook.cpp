@@ -179,15 +179,14 @@ void modifyBook::ModifyOnelineInFile(int nNUmLine,QString cnt){
 }
 void modifyBook::on_change_but_clicked()
 {
-    QString id=this->ui->le_id->text();
+    QString id=this->ui->le_id->text().trimmed();
     if(id==""){
         QMessageBox::warning(this,"Warning","Please select a book to modify!",QMessageBox::Yes);
     }
     int index=this->ui->cbb_but->currentIndex();
-    QString cnt0=this->ui->line2->text();
-
+    QString cnt0=this->ui->line2->text().trimmed();
     if(checkblank(cnt0)){
-        QMessageBox::critical(this,"Warning","input doesn't match!","ok");/***************新增*/
+        QMessageBox::critical(this,"Warning","input doesn't match!","ok");
     }
     else if(!checkblank(cnt0)){
     bok_lines.clear();
@@ -200,8 +199,9 @@ void modifyBook::on_change_but_clicked()
         if(id==subs.at(2)){
         switch (index){
         case 0:
-            if(index==0)
-            QMessageBox::warning(this,"Warning","Please select edit item!",QMessageBox::Yes);
+            if(index==0){
+            	QMessageBox::warning(this,"Warning","Please select edit item!",QMessageBox::Yes);
+            }
             break;
         case 1:
             if(index==1){
@@ -236,11 +236,11 @@ void modifyBook::on_change_but_clicked()
     }
 
 }
-int modifyBook::checkblank(QString cnt){/************新增*****/
+int modifyBook::checkblank(QString cnt){
     int temp=0;
     int i=0;
     for(i=0;i<cnt.length();i++){
-        if(cnt.at(i)==" "){
+        if(cnt.at(i)==' '){
             temp=1;
             break;
         }
@@ -248,6 +248,21 @@ int modifyBook::checkblank(QString cnt){/************新增*****/
     return temp;
 }
 void modifyBook::clearUserFace(){
+
+    if(readFile()==-1){
+        QMessageBox::critical(this,"wrong","unable to open file","ok");
+        this->close();
+    }
+    this->model=new QStandardItemModel;
+    //设置表头
+    this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
+    this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
+    this->model->setHorizontalHeaderItem(2,new QStandardItem("id"));
+    this->model->setHorizontalHeaderItem(3,new QStandardItem("num"));
+    this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
+
+    this->ui->tableView->setModel(model);
+    this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->le_id->clear();
     ui->line2->clear();
 }
