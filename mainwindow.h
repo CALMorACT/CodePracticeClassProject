@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-07-16 11:35:25
- * @LastEditTime: 2020-07-16 11:47:31
- * @LastEditors: your name
+ * @LastEditTime: 2020-07-16 18:22:08
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \CodePracticeClassProjectc:\Users\26466\Documents\Tencent Files\2646677495\FileRecv\project7\mainwindow.h
  */ 
@@ -32,17 +32,17 @@ signals:
     void changepwdsignal();
 private slots:
     void on_returnBtn_clicked();
-    void display(int row,QStringList subs);//ÔÚÄ£ĞÍÖĞÊä³öµÄº¯Êı
-    void doQuery(int index,QString cnt);//ÕûÌå²éÑ¯
+    void display(int row,QStringList subs);//åœ¨æ¨¡å‹ä¸­è¾“å‡ºçš„å‡½æ•°
+    void doQuery(int index,QString cnt);//æ•´ä½“æŸ¥è¯¢
     /******/
-    int readFromFile();//¶ÁÈëÊı¾İ´æÈëÈİÆ÷µÄº¯Êı
+    int readFromFile();//è¯»å…¥æ•°æ®å­˜å…¥å®¹å™¨çš„å‡½æ•°
     int cmp(QString str1,QString str2);
     void on_changepwdBtn_clicked();
     void refresh();
     void showAll();
     void on_check_clicked();
-    void doQuery2(QString cnt0,QString cnt1,QString cnt2);//ÒÑ½èÔÄÊé¼®²éÑ¯º¯Êı
-    void display2(int row,QStringList subs);//ÒÑ½èÔÄÊé¼®µÄÏÔÊ¾º¯Êı
+    void doQuery2(QString cnt0,QString cnt1,QString cnt2);//å·²å€Ÿé˜…ä¹¦ç±æŸ¥è¯¢å‡½æ•°
+    void display2(int row,QStringList subs);//å·²å€Ÿé˜…ä¹¦ç±çš„æ˜¾ç¤ºå‡½æ•°
     void on_pushButton_clicked();
 
     void on_borrowBtn_clicked();

@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-07-15 16:08:20
- * @LastEditTime: 2020-07-16 11:53:04
- * @LastEditors: your name
+ * @LastEditTime: 2020-07-16 18:23:38
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \CodePracticeClassProject\studentlistdlg.cpp
  */ 
@@ -19,9 +19,9 @@ studentlistDlg::studentlistDlg(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-    db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊý¾Ý¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("list.db");
+    if(!db.open())
     {
     close();
     }
@@ -48,9 +48,9 @@ void studentlistDlg::on_returnBtn_clicked()
 void studentlistDlg::refresh()
 {
     ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-    db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊý¾Ý¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("list.db");
+    if(!db.open())
     {
     close();
     }
@@ -66,9 +66,9 @@ void studentlistDlg::refresh()
 void studentlistDlg::on_listBtn_clicked()
 {
     ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-    db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊý¾Ý¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("list.db");
+    if(!db.open())
     {
     close();
     }
@@ -85,9 +85,9 @@ void studentlistDlg::on_searchBtn_clicked()
 {
     QString bookid;
     bookid=ui->lineEdit->text();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-    db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊý¾Ý¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("list.db");
+    if(!db.open())
     {
     close();
     }
