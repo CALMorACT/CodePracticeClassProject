@@ -116,7 +116,7 @@ int newBook::checkblank(QString cnt){
     int temp=0;
     int i=0;
     for(i=0;i<cnt.length();i++){
-        if(cnt.at(i)==" "){
+        if(cnt.at(i)==' '){
             temp=1;
             break;
         }
