@@ -28,10 +28,10 @@ newBook::~newBook()
 
 void newBook::on_ok_bu_clicked()
 {
-    QString name=this->ui->name->text();
-    QString writer=this->ui->writer->text();
-    QString id=this->ui->id->text();
-    QString num=this->ui->num->text();
+    QString name=this->ui->name->text().trimmed();
+    QString writer=this->ui->writer->text().trimmed();
+    QString id=this->ui->id->text().trimmed();
+    QString num=this->ui->num->text().trimmed();
     int index=2;
 
     QString content="name "+name+"\n"+"writer "+writer+"\n"+"id "+id+"\n"+"num "+num;
