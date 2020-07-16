@@ -23,6 +23,7 @@ modifyBook::modifyBook(QWidget *parent) :
     this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
 
     this->ui->tableView->setModel(model);
+    this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 modifyBook::~modifyBook()
@@ -31,7 +32,8 @@ modifyBook::~modifyBook()
 }
 
 void modifyBook::on_ok_but_clicked()
-{    this->model->clear();
+{
+     this->model->clear();
      this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
      this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
      this->model->setHorizontalHeaderItem(2,new QStandardItem("id"));
@@ -39,7 +41,10 @@ void modifyBook::on_ok_but_clicked()
      this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
 
      this->ui->tableView->setModel(model);
+     this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     QString id=this->ui->le_id->text();
+     bok_lines.clear();
+      readFile();
      doQuery(id);
 
 }
@@ -127,11 +132,16 @@ int modifyBook::MOdify(int nNum, QString &strall, QString cnt){
             }
         }
         //替换的不是最后一行
-        if(nNum<nLine-1){
+        if(nNum<nLine-1&&nLine>1){
             strall.replace(nIndex+1,nIndex2-nIndex,cnt);
         }
         //删除的是最后一行
-        else if(nNum==nLine-1){
+        if(nNum==nLine-1&&nLine==1){
+            int len =strall.length();
+            strall.replace(nIndex,len-nIndex,cnt);
+            lastline=1;
+        }
+        else if(nNum==nLine-1&&nLine!=1){
             int len =strall.length();
             strall.replace(nIndex+1,len-nIndex,cnt);
             lastline=1;
@@ -169,11 +179,26 @@ void modifyBook::ModifyOnelineInFile(int nNUmLine,QString cnt){
         writefile.close();
     }
 
+     QMessageBox::question(this,"congratulation","operation was successful","ok");
+
+
+
 }
 void modifyBook::on_change_but_clicked()
-{   QString id=this->ui->le_id->text();
+{
+    QString id=this->ui->le_id->text();
+    if(id==""){
+        QMessageBox::warning(this,"Warning","Please select a book to modify!",QMessageBox::Yes);
+    }
     int index=this->ui->cbb_but->currentIndex();
     QString cnt0=this->ui->line2->text();
+
+    if(checkblank(cnt0)){
+        QMessageBox::critical(this,"Warning","input doesn't match!","ok");/***************新增*/
+    }
+    else if(!checkblank(cnt0)){
+    bok_lines.clear();
+    readFile();
     int i=0;
     for(i=0;i<bok_lines.length();i++){
         QString line=bok_lines.at(i);//从容器中得到每一行的数据
@@ -181,13 +206,16 @@ void modifyBook::on_change_but_clicked()
         QStringList subs=line.split(" ");//将各个数据分离
         if(id==subs.at(2)){
         switch (index){
+        case 0:
+            if(index==0)
+            QMessageBox::warning(this,"Warning","Please select edit item!",QMessageBox::Yes);
+            break;
         case 1:
             if(index==1){
-            QString cnt1=cnt0+" "+subs.at(1)+" "+subs.at(2)+" "+subs.at(3)+" "+subs.at(4)+"\n";
+                QString cnt1=cnt0+" "+subs.at(1)+" "+subs.at(2)+" "+subs.at(3)+" "+subs.at(4)+"\n";
                 ModifyOnelineInFile(i,cnt1);
                 }
-
-
+             break;
          case 2:
             if(index==2){
             QString cnt2=subs.at(0)+" "+cnt0+" "+subs.at(2)+" "+subs.at(3)+" "+subs.at(4)+"\n";
@@ -212,5 +240,21 @@ void modifyBook::on_change_but_clicked()
         }
         }
     }
+    }
 
+}
+int modifyBook::checkblank(QString cnt){/************新增*****/
+    int temp=0;
+    int i=0;
+    for(i=0;i<cnt.length();i++){
+        if(cnt.at(i)==" "){
+            temp=1;
+            break;
+        }
+    }
+    return temp;
+}
+void modifyBook::clearUserFace(){
+    ui->le_id->clear();
+    ui->line2->clear();
 }

@@ -23,6 +23,8 @@ public:
     int MOdify(int nNum,QString &strall,QString cnt);
     void ModifyOnelineInFile(int nNUmLine,QString cnt);
     void deleter(QString &strall);
+    void clearUserFace();
+    int checkblank(QString cnt);
 private slots:
     void on_ok_but_clicked();
     void on_change_but_clicked();

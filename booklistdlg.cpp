@@ -8,6 +8,7 @@
 #include<QTextStream>
 #include<QStringList>
 #include<QSqlQuery>
+#include<modifybook.h>
 booklistDlg::booklistDlg(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::booklistDlg)
@@ -26,6 +27,7 @@ booklistDlg::booklistDlg(QWidget *parent) :
    this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
 
    this->ui->tableView->setModel(model);
+   this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
 }
 
@@ -42,6 +44,7 @@ void booklistDlg::on_returnBtn_clicked()
 
 void booklistDlg::on_add_clicked()
 {
+    this->a.clearUserFace();
     this->a.show();
 }
 int booklistDlg::readFromFile(){
@@ -60,33 +63,37 @@ int booklistDlg::readFromFile(){
 
 
 void booklistDlg::on_btn_search_clicked()
-{   this->model->clear();
-    this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
-    this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
-    this->model->setHorizontalHeaderItem(2,new QStandardItem("id"));
-    this->model->setHorizontalHeaderItem(3,new QStandardItem("num"));
-    this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
-
-    this->ui->tableView->setModel(model);
+{
     try {
-        int index=this->ui->cbb_method->currentIndex();
-        ui->le_cnt->textEdited(m_sLastSearch);
-        QString cnt=this->ui->le_cnt->text();
-        if(index==0)
-        {
-            throw "Please choose your search function";
-        }
-        /*
-         * index:
-         * 1: 按照书名
-         * 2: 按照作者
-         * 3: 按照编号
-        */
-        m_sLastSearch = cnt;
-        doQuery(index,cnt);
-    } catch (const char* err) {
-        QMessageBox::critical(this,"wrong",err,"ok");
-    }
+           int index=this->ui->cbb_method->currentIndex();
+           ui->le_cnt->textEdited(m_sLastSearch);
+           QString cnt=this->ui->le_cnt->text();
+           if(index==0)
+           {
+               QMessageBox::warning(this,"Warning","Please select a search method!",QMessageBox::Yes);
+           }
+           /*
+            * index:
+            * 1: 按照书名
+            * 2: 按照作者
+            * 3: 按照编号
+           */
+           else{
+               this->model->clear();
+               this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
+               this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
+               this->model->setHorizontalHeaderItem(2,new QStandardItem("id"));
+               this->model->setHorizontalHeaderItem(3,new QStandardItem("num"));
+               this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
+
+               this->ui->tableView->setModel(model);
+               this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+               m_sLastSearch = cnt;
+               doQuery(index,cnt);
+           }
+       } catch (const char* err) {
+           QMessageBox::critical(this,"wrong",err,"ok");
+       }
 
 }
 void booklistDlg::doQuery(int index,QString cnt){
@@ -126,25 +133,56 @@ void booklistDlg::display(int row,QStringList subs){//传入行和书的信息
     }
 }
 int booklistDlg::cmp(QString str1,QString str2){
+    int index=1;
     int temp=1;
-    int i=0;
-    for(i=0;i<str2.length();i++){
-        if(str1.at(i)!=str2.at(i)){
-            temp=0;
+    int index2=0;
+    int j=0;
+    for(j=0;j<str1.length();j++){
+        if(str1.at(j)==str2.at(0)&&(str1.length()-j)>=str2.length()){
+             index2=1;
+            int i=0;
+            for(i=0;i<str2.length();i++){//第二循环开头
+                if(str1.at(j)!=str2.at(i)){
+                    temp=0;
+                }
+                j++;
+                if(temp==0){
+                    index=0;
+                    temp=1;
+                    break;
+                }
+            }//第二循环结尾
+            if(temp==1){
+                index=1;
+                break;
+            }
         }
     }
-    return temp;
+    int all=index+temp;
+    if(index2==0){
+        all=0;
+    }
+    return all;
 }
-
-
 
 void booklistDlg::on_deleteBtn_clicked()
 {
+    b.clearFace();
     b.show();
 }
 
 void booklistDlg::on_pushButton_clicked()
 {
+    this->refresh();
+}
+
+void booklistDlg::on_reviseBtn_clicked()
+{
+    c.clearUserFace();
+    c.show();
+}
+void booklistDlg::refresh(){
+    ui->le_cnt->clear();
     this->model->clear();
         this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
         this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
@@ -153,6 +191,7 @@ void booklistDlg::on_pushButton_clicked()
         this->model->setHorizontalHeaderItem(4,new QStandardItem("totalnum"));
 
         this->ui->tableView->setModel(model);
+        this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     QFile file("book.txt");
     if(!file.open(QIODevice::ReadOnly| QIODevice::Text)){
         QMessageBox::critical(this,"wrong","unable to open file!","ok");//打开失败反馈给用户
@@ -176,10 +215,5 @@ void booklistDlg::on_pushButton_clicked()
             this->model->setItem(i,j,new QStandardItem(subs.at(j)));
         }
     }
-
-}
-
-void booklistDlg::on_reviseBtn_clicked()
-{
 
 }

@@ -44,9 +44,8 @@ int main(int argc, char *argv[])
     }
     QSqlQuery query(db); //以下执行相关 QSL 语句
     query.exec("create table student(name varchar,id varchar primary key,password varchar,bookid1 varchar,bookid2 varchar,bookid3 vachar)");
-    query.exec("insert into student values('manager','manager','123456','0','0','0')");
+    query.exec("insert into student values('manager','manager','123456','-1','-1','-1')");
     //向表中插入 1 条记录,管理者
-    query.exec("create table book(title varchar,bookid varchar primary key,writer varchar,totalnum int,num int)");
     QApplication a(argc, argv);
     MainWindow w;
     loginDlg l;
@@ -72,6 +71,8 @@ int main(int argc, char *argv[])
     QObject::connect(&m,SIGNAL(studentlistsignal()),&s,SLOT(refresh()));
     QObject::connect(&m,SIGNAL(booklistsignal()),&b,SLOT(refresh()));
     QObject::connect(&l,SIGNAL(login()),&w,SLOT(refresh()));
+    QObject::connect(&m,SIGNAL(booklistsignal()),&b,SLOT(refresh()));
+
     l.show();
 
     return a.exec();

@@ -96,14 +96,16 @@ void delBook::deleteOnelineInFile(int nNUmLine){
 
 void delBook::on_no_but_clicked()
 {
+    clearFace();
     this->close();
 }
 void delBook::on_ok_but_clicked()
 {
-    QString id=this->ui->le_id->text();
-    QString name=this->ui->le_name->text();
-    QString writer=this->ui->le_writer->text();
-
+    QString id=this->ui->le_id->text().trimmed();
+    QString name=this->ui->le_name->text().trimmed();
+    QString writer=this->ui->le_writer->text().trimmed();
+    del_lines.clear();
+    readdata();
     int i=0;
     int temp=0;
     for(i=0;i<del_lines.length();i++){

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-15 16:08:20
+ * @LastEditTime: 2020-07-16 11:53:04
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \CodePracticeClassProject\studentlistdlg.cpp
+ */ 
 #include "studentlistdlg.h"
 #include "ui_studentlistdlg.h"
 #include <QApplication>
@@ -11,9 +19,9 @@ studentlistDlg::studentlistDlg(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-    db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊý¾Ý¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //ÃŒÃ­Â¼Ã“ÃŠÃ½Â¾ÃÂ¿Ã¢Ã‡Ã½Â¶Â¯
+    db.setDatabaseName("list.db"); //ÃŠÃ½Â¾ÃÂ¿Ã¢ÃÂ¬Â½Ã“ÃƒÃ¼ÃƒÃ»
+    if(!db.open()) //Â´Ã²Â¿ÂªÃŠÃ½Â¾ÃÂ¿Ã¢
     {
     close();
     }
@@ -36,13 +44,31 @@ void studentlistDlg::on_returnBtn_clicked()
     this->hide();
     emit returnsignal();
 }
-//Ë¢ÐÂÏÔÊ¾
+//åˆ·æ–°æ˜¾ç¤º
 void studentlistDlg::refresh()
 {
     ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-    db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊý¾Ý¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //ÃŒÃ­Â¼Ã“ÃŠÃ½Â¾ÃÂ¿Ã¢Ã‡Ã½Â¶Â¯
+    db.setDatabaseName("list.db"); //ÃŠÃ½Â¾ÃÂ¿Ã¢ÃÂ¬Â½Ã“ÃƒÃ¼ÃƒÃ»
+    if(!db.open()) //Â´Ã²Â¿ÂªÃŠÃ½Â¾ÃÂ¿Ã¢
+    {
+    close();
+    }
+    QSqlTableModel* model=new QSqlTableModel;
+    model->setTable("student");
+    model->setFilter(QObject::tr("bookid1 >= 0 and bookid2 >= 0 and bookid3 >= 0 "));
+    model->select();
+    model->removeColumn(2);
+    ui->tableView->setModel(model);
+    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+}
+
+void studentlistDlg::on_listBtn_clicked()
+{
+    ui->lineEdit->clear();
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //ÃŒÃ­Â¼Ã“ÃŠÃ½Â¾ÃÂ¿Ã¢Ã‡Ã½Â¶Â¯
+    db.setDatabaseName("list.db"); //ÃŠÃ½Â¾ÃÂ¿Ã¢ÃÂ¬Â½Ã“ÃƒÃ¼ÃƒÃ»
+    if(!db.open()) //Â´Ã²Â¿ÂªÃŠÃ½Â¾ÃÂ¿Ã¢
     {
     close();
     }
@@ -59,9 +85,9 @@ void studentlistDlg::on_searchBtn_clicked()
 {
     QString bookid;
     bookid=ui->lineEdit->text();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-    db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊý¾Ý¿â
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //ÃŒÃ­Â¼Ã“ÃŠÃ½Â¾ÃÂ¿Ã¢Ã‡Ã½Â¶Â¯
+    db.setDatabaseName("list.db"); //ÃŠÃ½Â¾ÃÂ¿Ã¢ÃÂ¬Â½Ã“ÃƒÃ¼ÃƒÃ»
+    if(!db.open()) //Â´Ã²Â¿ÂªÃŠÃ½Â¾ÃÂ¿Ã¢
     {
     close();
     }
@@ -73,22 +99,3 @@ void studentlistDlg::on_searchBtn_clicked()
     ui->tableView->setModel(model);
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
-
-void studentlistDlg::on_listBtn_clicked()
-{
-    ui->lineEdit->clear();
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); //Ìí¼ÓÊý¾Ý¿âÇý¶¯
-    db.setDatabaseName("list.db"); //Êý¾Ý¿âÁ¬½ÓÃüÃû
-    if(!db.open()) //´ò¿ªÊý¾Ý¿â
-    {
-    close();
-    }
-    QSqlTableModel* model=new QSqlTableModel;
-    model->setTable("student");
-    model->setFilter(QObject::tr("bookid1 >= 0 and bookid2 >= 0 and bookid3 >= 0 "));
-    model->select();
-    model->removeColumn(2);
-    ui->tableView->setModel(model);
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-}
-

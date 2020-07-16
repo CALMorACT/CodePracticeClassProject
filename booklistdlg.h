@@ -17,6 +17,7 @@
 #include<QStandardItem>
 #include<QStandardItemModel>
 #include"delbook.h"
+#include"modifybook.h"
 namespace Ui {
 class booklistDlg;
 }
@@ -37,12 +38,13 @@ private slots:
     void doQuery(int index,QString cnt);
     void on_btn_search_clicked();
     int cmp(QString str1,QString str2);
-
     void on_deleteBtn_clicked();
 
     void on_pushButton_clicked();
 
     void on_reviseBtn_clicked();
+
+    void refresh();
 
 signals:
     void returnsignal();
@@ -51,8 +53,9 @@ private:
     newBook a;
     QList<QString> bok_lines;
     QStandardItemModel *model;
-    delBook b;
     QString m_sLastSearch;
+    delBook b;
+    modifyBook c;
 };
 
 #endif // BOOKLISTDLG_H

@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-07-15 16:08:20
- * @LastEditTime: 2020-07-15 16:33:27
- * @LastEditors: your name
+ * @LastEditTime: 2020-07-16 11:34:33
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \CodePracticeClassProject\newbook.h
  */ 
@@ -24,7 +24,9 @@ public:
     explicit newBook(QWidget *parent = nullptr);
     ~newBook();
     void writeToFile(QString cnt);
-    void clearUserFace();//确认后清屏
+    void clearUserFace();
+    int checkid(QString id);
+    int checkblank(QString cnt);
 
 private slots:
     void on_ok_bu_clicked();
@@ -33,6 +35,7 @@ private slots:
 
 private:
     Ui::newBook *ui;
+    QList<QString> bok_lines;
 };
 
-#endif // NEWBOOK_H
+#endif

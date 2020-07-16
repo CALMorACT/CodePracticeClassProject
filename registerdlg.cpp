@@ -27,7 +27,7 @@ registerDlg::~registerDlg()
 void registerDlg::on_registerBtn_clicked()
 {
     //检查注册信息是否有未填项
-    if(ui->nameEdit->text()==""||ui->registerid->text()==""||ui->registerpwd->text()==""||ui->registerpwd2->text()==""){
+    if(ui->nameEdit->text().trimmed()==""||ui->registerid->text().trimmed()==""||ui->registerpwd->text()==""||ui->registerpwd2->text()==""){
         QMessageBox::warning(this,"Warning","Name,id , password one or password two is empty!",QMessageBox::Yes);
     }
     else{
@@ -46,7 +46,7 @@ void registerDlg::on_registerBtn_clicked()
             while(query.next()){
                 QString id=query.value(1).toString();
                 QString password=query.value(2).toString();
-                if(ui->registerid->text()==id){
+                if(ui->registerid->text().trimmed()==id){
                     a=1;
                     QMessageBox::warning(this,"Warning","This id has already been registered!",QMessageBox::Yes);
                 }
@@ -61,12 +61,12 @@ void registerDlg::on_registerBtn_clicked()
             }
             else{
                 QString name,id, password;
-                name=ui->nameEdit->text();
-                id=ui->registerid->text();
+                name=ui->nameEdit->text().trimmed();
+                id=ui->registerid->text().trimmed();
                 password=ui->registerpwd->text();
                 QString i=QString("insert into student values('%1','%2','%3','0','0','0')").arg(name).arg(id).arg(password);
                 if(query.exec(i)){
-                   QMessageBox::information(this,"Registered successfully!","Registered successfully!!!",QMessageBox::Yes);
+                   QMessageBox::question(this,"Registered successfully!","Registered successfully!!!","ok");
                    ui->nameEdit->clear();
                    ui->registerid->clear();
                    ui->registerpwd->clear();
