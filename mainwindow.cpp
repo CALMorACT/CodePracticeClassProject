@@ -88,8 +88,10 @@ void MainWindow::on_check_clicked()
             this->model->setHorizontalHeaderItem(3,new QStandardItem("num"));
             this->ui->tableView->setModel(model);
             this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-            QString cnt=this->ui->le_line->text();
-            doQuery(index,cnt);
+            QString cnt=this->ui->le_line->text().trimmed();
+            if(cnt!=""){
+                doQuery(index,cnt);
+            }
         }
 }
 int MainWindow::cmp(QString str1,QString str2){
@@ -160,74 +162,6 @@ void MainWindow::doQuery(int index,QString cnt){
         }
     }
 }
-void MainWindow::showAll(){
-    QFile file("book.txt");
-    if(!file.open(QIODevice::ReadOnly| QIODevice::Text)){
-        QMessageBox::critical(this,"wrong","unable to open file!","ok");//打开失败反馈给用户
-        return;
-    }
-    QTextStream in(&file);
-    bok_lines.clear();
-    while(!in.atEnd()){
-        QString line=in.readLine();
-        bok_lines.append(line);
-    }
-
-    file.close();
-    int i=0;
-    for(i=0;i<bok_lines.length();i++){
-        QString line=bok_lines.at(i);//从容器中得到每一行的数据
-        line=line.trimmed();
-        QStringList subs=line.split(" ");
-        int j=0;
-        for(j=0;j<subs.length()-1;j++){
-            this->model->setItem(i,j,new QStandardItem(subs.at(j)));
-        }
-}
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    this->refresh();
-}
-void MainWindow::refresh(){
-    ui->bookidEdit->clear();
-    ui->le_line->clear();
-    this->model->clear();
-    this->model=new QStandardItemModel;
-    //设置表头
-    this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
-    this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
-    this->model->setHorizontalHeaderItem(2,new QStandardItem("id"));
-    this->model->setHorizontalHeaderItem(3,new QStandardItem("num"));
-
-    this->ui->tableView->setModel(model);
-    this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-   showAll();
-}
-
-void MainWindow::display2(int row,QStringList subs){
-    int i=0;
-    for(i=0;i<subs.length()-2;i++){
-        this->model->setItem(row,i,new QStandardItem(subs.at(i)));
-    }
-}
-void MainWindow::doQuery2(QString cnt0,QString cnt1,QString cnt2){
-    int i=0;
-    int row=0;
-    for(i=0;i<bok_lines.length();i++){
-        QString line=bok_lines.at(i);//从容器中得到每一行的数据
-        line=line.trimmed();
-        QStringList subs=line.split(" ");//将各个数据分离
-
-            if(cnt0==subs.at(2)||cnt1==subs.at(2)||cnt2==subs.at(2)){//判断文档里是否有与三个id相同的
-
-                display2(row++,subs);
-            }
-
-
-        }
-    }
 
  int MainWindow::borrowBook(QString id){
     int i=0;
@@ -247,7 +181,7 @@ void MainWindow::doQuery2(QString cnt0,QString cnt1,QString cnt2){
                 qDebug()<<num;
                 QString cnt0=QString::number(num,10);
                 qDebug()<<cnt0;
-                QString cnt=subs.at(0)+" "+subs.at(1)+" "+subs.at(2)+" "+cnt0+" "+subs.at(1)+"\n";
+                QString cnt=subs.at(0)+" "+subs.at(1)+" "+subs.at(2)+" "+cnt0+" "+subs.at(4)+"\n";
                 ChangeInFile(i,cnt);
                 break;
             }
@@ -358,19 +292,19 @@ int MainWindow::Change(int nNum,QString &strall,QString cnt){
 int MainWindow::returnBook(QString id){
    int i=0;
    int index=0;
-   int index2=0;
+   int index2=1;
    for(i=0;i<bok_lines.length();i++){
        QString line=bok_lines.at(i);//从容器中得到每一行的数据
        line=line.trimmed();
        QStringList subs=line.split(" ");//将各个数据分离
        if(id==subs.at(2)){//判断是否有这本书
+           index2=0;
            int num=subs.at(3).toInt();
-           if(i>0){
                num++;
-               QString cnt=QString::number(num,10);
+               QString cnt0=QString::number(num,10);
+               QString cnt=subs.at(0)+" "+subs.at(1)+" "+subs.at(2)+" "+cnt0+" "+subs.at(4)+"\n";
                ChangeInFile(i,cnt);
-           }
-           index2=1;
+           break;
        }
 }
    if(index2==1){
@@ -379,6 +313,77 @@ int MainWindow::returnBook(QString id){
    }
    return index;
 }
+
+void MainWindow::showAll(){
+    QFile file("book.txt");
+    if(!file.open(QIODevice::ReadOnly| QIODevice::Text)){
+        QMessageBox::critical(this,"wrong","unable to open file!","ok");//打开失败反馈给用户
+        return;
+    }
+    QTextStream in(&file);
+    bok_lines.clear();
+    while(!in.atEnd()){
+        QString line=in.readLine();
+        bok_lines.append(line);
+    }
+
+    file.close();
+    int i=0;
+    for(i=0;i<bok_lines.length();i++){
+        QString line=bok_lines.at(i);//从容器中得到每一行的数据
+        line=line.trimmed();
+        QStringList subs=line.split(" ");
+        int j=0;
+        for(j=0;j<subs.length()-1;j++){
+            this->model->setItem(i,j,new QStandardItem(subs.at(j)));
+        }
+}
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    this->refresh();
+}
+void MainWindow::refresh(){
+    ui->bookidEdit->clear();
+    ui->le_line->clear();
+    this->model->clear();
+    this->model=new QStandardItemModel;
+    //设置表头
+    this->model->setHorizontalHeaderItem(0,new QStandardItem("title"));
+    this->model->setHorizontalHeaderItem(1,new QStandardItem("writer"));
+    this->model->setHorizontalHeaderItem(2,new QStandardItem("id"));
+    this->model->setHorizontalHeaderItem(3,new QStandardItem("num"));
+
+    this->ui->tableView->setModel(model);
+    this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+   showAll();
+}
+
+void MainWindow::display2(int row,QStringList subs){
+    int i=0;
+    for(i=0;i<subs.length()-2;i++){
+        this->model->setItem(row,i,new QStandardItem(subs.at(i)));
+    }
+}
+void MainWindow::doQuery2(QString cnt0,QString cnt1,QString cnt2){
+    int i=0;
+    int row=0;
+    for(i=0;i<bok_lines.length();i++){
+        QString line=bok_lines.at(i);//从容器中得到每一行的数据
+        line=line.trimmed();
+        QStringList subs=line.split(" ");//将各个数据分离
+
+            if(cnt0==subs.at(2)||cnt1==subs.at(2)||cnt2==subs.at(2)){//判断文档里是否有与三个id相同的
+
+                display2(row++,subs);
+            }
+
+
+        }
+    }
+
+
 void MainWindow::on_borrowBtn_clicked()
 {
     QString bookid,studentid;
@@ -412,38 +417,47 @@ void MainWindow::on_borrowBtn_clicked()
                 if(id==studentid){
                     QString bookid1=query.value(2).toString(),bookid2=query.value(3).toString(),bookid3=query.value(4).toString();
                     if(bookid1=="0"){
-                        QString updatesql=QString("update student set bookid1 = '%1' where id = '%2'").arg(bookid).arg(id);
-                        bool a=query.exec(updatesql);
-                        if(a){
-                            QMessageBox::question(this,"Borrow successfully!","Borrow successfully!!!","ok");
-                            ui->bookidEdit->clear();
-                        }
-                        else{
-                            QMessageBox::warning(this,"Warning","Borrow unsuccessfully!",QMessageBox::Yes);
+                        int ret=borrowBook(bookid);
+                        if(ret==0){
+                            QString updatesql=QString("update student set bookid1 = '%1' where id = '%2'").arg(bookid).arg(id);
+                            bool a=query.exec(updatesql);
+                            if(a){
+                                QMessageBox::question(this,"Borrow successfully!","Borrow successfully!!!","ok");
+                                ui->bookidEdit->clear();
+                            }
+                            else{
+                                QMessageBox::warning(this,"Warning","Borrow unsuccessfully!",QMessageBox::Yes);
+                            }
                         }
                         break;
                     }
                     else if(bookid2=="0"){
-                        QString updatesql=QString("update student set bookid2 = '%1' where id = '%2'").arg(bookid).arg(id);
-                        bool a=query.exec(updatesql);
-                        if(a){
-                            QMessageBox::question(this,"Borrow successfully!","Borrow successfully!!!","ok");
-                            ui->bookidEdit->clear();
-                        }
-                        else{
-                            QMessageBox::warning(this,"Warning","Borrow unsuccessfully!",QMessageBox::Yes);
+                        int ret=borrowBook(bookid);
+                        if(ret==0){
+                            QString updatesql=QString("update student set bookid2 = '%1' where id = '%2'").arg(bookid).arg(id);
+                            bool a=query.exec(updatesql);
+                            if(a){
+                                QMessageBox::question(this,"Borrow successfully!","Borrow successfully!!!","ok");
+                                ui->bookidEdit->clear();
+                            }
+                            else{
+                                QMessageBox::warning(this,"Warning","Borrow unsuccessfully!",QMessageBox::Yes);
+                            }
                         }
                         break;
                     }
                     else if(bookid3=="0"){
-                        QString updatesql=QString("update student set bookid3 = '%1' where id = '%2'").arg(bookid).arg(id);
-                        bool a=query.exec(updatesql);
-                        if(a){
-                            QMessageBox::question(this,"Borrow successfully!","Borrow successfully!!!","ok");
-                            ui->bookidEdit->clear();
-                        }
-                        else{
-                            QMessageBox::warning(this,"Warning","Borrow unsuccessfully!",QMessageBox::Yes);
+                        int ret=borrowBook(bookid);
+                        if(ret==0){
+                            QString updatesql=QString("update student set bookid3 = '%1' where id = '%2'").arg(bookid).arg(id);
+                            bool a=query.exec(updatesql);
+                            if(a){
+                                QMessageBox::question(this,"Borrow successfully!","Borrow successfully!!!","ok");
+                                ui->bookidEdit->clear();
+                            }
+                            else{
+                                QMessageBox::warning(this,"Warning","Borrow unsuccessfully!",QMessageBox::Yes);
+                            }
                         }
                         break;
                     }
@@ -455,6 +469,7 @@ void MainWindow::on_borrowBtn_clicked()
                 }
             }
         }
+    }
 }
 
 void MainWindow::on_remandBtn_clicked()
@@ -528,8 +543,7 @@ void MainWindow::on_remandBtn_clicked()
                 //将该书的库存量加一,该书书号变量为bookid，变量类型为QString
                 int ret=returnBook(bookid);/***0代表归还成功*/
                                            //2代表没有这本书
-                a=1;//占位，可删
-
+            }
         }
     }
 }

@@ -67,7 +67,7 @@ void booklistDlg::on_btn_search_clicked()
     try {
            int index=this->ui->cbb_method->currentIndex();
            ui->le_cnt->textEdited(m_sLastSearch);
-           QString cnt=this->ui->le_cnt->text();
+           QString cnt=this->ui->le_cnt->text().trimmed();
            if(index==0)
            {
                QMessageBox::warning(this,"Warning","Please select a search method!",QMessageBox::Yes);
@@ -89,7 +89,9 @@ void booklistDlg::on_btn_search_clicked()
                this->ui->tableView->setModel(model);
                this->ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
                m_sLastSearch = cnt;
-               doQuery(index,cnt);
+               if(cnt!=""){
+                   doQuery(index,cnt);
+               }
            }
        } catch (const char* err) {
            QMessageBox::critical(this,"wrong",err,"ok");
